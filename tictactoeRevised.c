@@ -14,47 +14,26 @@ int displayGrid(char grid[]) {
 
 int endCondition(char grid[]){
     //checks the end conditions for the game
-    if(grid[0] == grid[1] && grid[1] == grid[2]){
-        return 1;
-    }
-    else if(grid[3] ==  grid[4] && grid[4] == grid[5]){
-            return 1;
-        }
-    else if(grid[6] == grid[7] && grid[7] == grid[8]){
-            return 1;
-        }
-    else if(grid[0] == grid[3] && grid[3] == grid[6]){
-            return 1;
-        }
-    
-    else if(grid[1] == grid[4] && grid[4] == grid[7]){
-            return 1;
-        }
-    
-    else if(grid[2] == grid[5] && grid[5] == grid[8]){
-            return 1;
-        }
-    
-        
-    else if(grid[0] == grid[4] && grid[4] == grid[8]){
-            return 1;
-        }
+    if(grid[0] == grid[1] && grid[1] == grid[2]) return 1;
+    else if(grid[3] ==  grid[4] && grid[4] == grid[5]) return 1;
+    else if(grid[6] == grid[7] && grid[7] == grid[8]) return 1;
+    else if(grid[0] == grid[3] && grid[3] == grid[6]) return 1;
+    else if(grid[1] == grid[4] && grid[4] == grid[7]) return 1;
+    else if(grid[2] == grid[5] && grid[5] == grid[8]) return 1;
+    else if(grid[0] == grid[4] && grid[4] == grid[8]) return 1;
+    else if(grid[2] == grid[4] && grid[4] == grid[6]) return 1;
 
-        
-    else if(grid[2] == grid[4] && grid[4] == grid[6]){
-            return 1;
-    }
     else if (grid[0] != '1' && grid[1] != '2' && grid[2] != '3' &&
          grid[3] != '4' && grid[4] != '5' && grid[5] != '6' &&
-         grid[6] != '7' && grid[7] != '8' && grid[8] != '9') {
+         grid[6] != '7' && grid[7] != '8' && grid[8] != '9')
     return 2;
-    }
+
     else{
         return 0;
     }
 }
 
-void playerTurn(char playerSymbol, char* playerName, char grid[]) {
+void playerTurn(char playerSymbol, char* playerName, char* grid) {
 	int gridLocation;
 
 	printf("\033[1;34m%s\033[0m's turn, Choose a location:\n\n", playerName);
@@ -85,12 +64,6 @@ int main() {
 	char grid[9] = { '1','2','3','4','5','6','7','8','9' };
 	char p1[10], p2[10];
 	int rematch = 1;
-
-	// making a pointer array for grid
-	char* gridpoint[9];
-	for (int i = 0; i < 9; i++) {
-		gridpoint[i] = &grid[i];
-	}
 
 	// start of game logic
 	printf("Enter name of player 1: ");
