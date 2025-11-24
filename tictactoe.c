@@ -78,6 +78,11 @@ int main(){
     int gridLocation;
     char rematch;
 
+    //making a pointer array for grid
+    char* gridpoint[9];
+    for(int i=0; i<9;i++){
+        gridpoint[i]=&grid[i];
+    }
     //start of game logic
     printf("Enter name of player 1: ");
     fgets(p1, sizeof(p1), stdin);
