@@ -33,10 +33,15 @@ int endCondition(char grid[]){
     }
 }
 
-void playerTurn(char playerSymbol, char* playerName, char* grid) {
+void playerTurn(int player, char* playerName, char* grid) {
 	int gridLocation;
+	char playerSymbol;
+	int playerColour;
 
-	printf("\033[1;34m%s\033[0m's turn, Choose a location:\n\n", playerName);
+	if(player==1) {playerSymbol='X'; playerColour=31;}
+	else {playerSymbol='O'; playerColour=34;}
+
+	printf("\033[1;%dm%s\033[0m's turn, Choose a location:\n\n",playerColour, playerName);
 	displayGrid(grid);
 	scanf("%d", &gridLocation);
 	gridLocation--;
@@ -44,18 +49,24 @@ void playerTurn(char playerSymbol, char* playerName, char* grid) {
 	// range validation
 	if (gridLocation < 0 || gridLocation > 8) {
 		printf("Invalid input! Try again.\n");
-		return playerTurn(playerSymbol, playerName, grid);
+		return playerTurn(player, playerName, grid);
 	}
 
 	// position occupied check
 	if (grid[gridLocation] == 'X' || grid[gridLocation] == 'O') {
 		printf("Spot taken! Please choose another location.\n");
-		return playerTurn(playerSymbol, playerName, grid);
+		return playerTurn(player, playerName, grid);
 	}
 
 	grid[gridLocation] = playerSymbol;
 }
+void displayScore(int* winCount, char* p1, char* p2){
+			printf("Score: \n");
+			printf("\033[1;31m%s: %d\033[0m:\n",p1,winCount[0]);
+			printf("\033[1;34m%s: %d\033[0m:\n",p2,winCount[1]);
 
+
+}
 
 int main() {
 	// beginning of main function
@@ -64,6 +75,7 @@ int main() {
 	char grid[9] = { '1','2','3','4','5','6','7','8','9' };
 	char p1[10], p2[10];
 	int rematch = 1;
+	int winCount[2]={0,0};
 
 	// start of game logic
 	printf("Enter name of player 1: ");
@@ -78,10 +90,10 @@ int main() {
 
 	while (rematch) {
 		while (1) {
-			playerTurn('X', p1, grid);
+			playerTurn(1, p1, grid);
 			if (endCondition(grid)) { lastplayer = 1; break; }
 
-			playerTurn('O', p2, grid);
+			playerTurn(2, p2, grid);
 			if (endCondition(grid)) { lastplayer = 2; break; }
 		}
 
@@ -92,10 +104,14 @@ int main() {
 		else if (lastplayer == 1) {
 			printf("\033[1;31m%s\033[0m wins! \n", p1);
 			displayGrid(grid);
+			winCount[0]++;
+			displayScore(winCount,p1,p2);
 		}
 		else if (lastplayer == 2) {
 			printf("\033[1;34m%s\033[0m wins! \n", p2);
 			displayGrid(grid);
+			winCount[1]++;
+			displayScore(winCount,p1,p2);
 		}
 
 		while (1) {
@@ -106,6 +122,7 @@ int main() {
 
 			if (choice == 'n' || choice == 'N') {
 				printf("Thanks for playing!\n");
+				displayScore(winCount,p1,p2);
 				rematch = 0;
 				break;
 			}
