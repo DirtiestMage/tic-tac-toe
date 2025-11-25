@@ -1,12 +1,9 @@
 #include<stdio.h>
 
-int displayGrid(char grid[]) {
+int displayGrid(char* grid) {
 
 	for (int i = 0; i < 9; i++) {
-		if (grid[i] == 'X') printf("  \033[1;31mX\033[0m  ");
-		else if (grid[i] == 'O') printf("  \033[1;34mO\033[0m  ");
-		else printf("  %c  ", grid[i]);
-
+		printf("  %c  ", grid[i]);
 		if ((i + 1) % 3 == 0) printf("\n\n");
 	}
 }
@@ -36,12 +33,11 @@ int endCondition(char grid[]){
 void playerTurn(int player, char* playerName, char* grid) {
 	int gridLocation;
 	char playerSymbol;
-	int playerColour;
 
-	if(player==1) {playerSymbol='X'; playerColour=31;}
-	else {playerSymbol='O'; playerColour=34;}
+	if(player==1) {playerSymbol='X';} 
+	else {playerSymbol='O';} 
 
-	printf("\033[1;%dm%s\033[0m's turn, Choose a location:\n\n",playerColour, playerName);
+	printf("%s, Choose a location:\n\n", playerName);
 	displayGrid(grid);
 	scanf("%d", &gridLocation);
 	gridLocation--;
@@ -62,8 +58,8 @@ void playerTurn(int player, char* playerName, char* grid) {
 }
 void displayScore(int* winCount, char* p1, char* p2){
 			printf("Score: \n");
-			printf("\033[1;31m%s: %d\033[0m:\n",p1,winCount[0]);
-			printf("\033[1;34m%s: %d\033[0m:\n",p2,winCount[1]);
+			printf("%s: %d\n",p1,winCount[0]);
+			printf("%s: %d\n",p2,winCount[1]);
 
 
 }
@@ -83,8 +79,8 @@ int main() {
 	printf("Enter name of player 2: ");
 	scanf("%s", p2);
 
-	printf("player 1: \033[1;31m%s\033[0m \n", p1);
-	printf("player 2: \033[1;34m%s\033[0m \n", p2);
+	printf("player 1: %s \n", p1);
+	printf("player 2: %s \n", p2);
 
 	int lastplayer = 1;
 
@@ -102,13 +98,13 @@ int main() {
 			displayGrid(grid);
 		}
 		else if (lastplayer == 1) {
-			printf("\033[1;31m%s\033[0m wins! \n", p1);
+			printf("%s wins! \n", p1);
 			displayGrid(grid);
 			winCount[0]++;
 			displayScore(winCount,p1,p2);
 		}
 		else if (lastplayer == 2) {
-			printf("\033[1;34m%s\033[0m wins! \n", p2);
+			printf("%s \n", p2);
 			displayGrid(grid);
 			winCount[1]++;
 			displayScore(winCount,p1,p2);
@@ -127,7 +123,7 @@ int main() {
 				break;
 			}
 			else if (choice == 'y' || choice == 'Y') {
-				printf("\033[1;31m%s\033[0m vs \033[1;34m%s\033[0m \n", p1, p2);
+				printf("%s vs %s \n", p1, p2);
 
 				// Reset grid
 				for (int i = 0; i < 9; i++) {
