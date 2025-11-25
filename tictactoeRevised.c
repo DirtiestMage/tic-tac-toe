@@ -84,7 +84,7 @@ int main() {
 	printf("player 1: %s \n", p1);
 	printf("player 2: %s \n", p2);
 
-	int lastplayer = 1;
+	int lastplayer;
 
 	while (rematch) {
 		while (1) {
