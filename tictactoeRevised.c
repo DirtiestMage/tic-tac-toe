@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-int displayGrid(char* grid) {
+void displayGrid(char* grid) {
 
 	for (int i = 0; i < 9; i++) {
 		printf("  %c  ", grid[i]);
