@@ -1,7 +1,7 @@
 #include<stdio.h>
 
-void displayGrid(char* grid) {
-
+int displayGrid(char* grid) {
+	//This function displays the tictactoe grid
 	for (int i = 0; i < 9; i++) {
 		printf("  %c  ", grid[i]);
 		if ((i + 1) % 3 == 0) printf("\n\n");
@@ -31,6 +31,7 @@ int endCondition(char grid[]){
 }
 
 void playerTurn(int player, char* playerName, char* grid) {
+	
 	int gridLocation;
 	char playerSymbol;
 
@@ -57,6 +58,7 @@ void playerTurn(int player, char* playerName, char* grid) {
 	grid[gridLocation] = playerSymbol;
 }
 void displayScore(int* winCount, char* p1, char* p2){
+			//This function prints the score of the players
 			printf("Score: \n");
 			printf("%s: %d\n",p1,winCount[0]);
 			printf("%s: %d\n",p2,winCount[1]);
@@ -92,7 +94,6 @@ int main() {
 			playerTurn(2, p2, grid);
 			if (endCondition(grid)) { lastplayer = 2; break; }
 		}
-
 		if (endCondition(grid) == 2) {
 			printf("The game is a draw! \n");
 			displayGrid(grid);
@@ -123,7 +124,7 @@ int main() {
 				break;
 			}
 			else if (choice == 'y' || choice == 'Y') {
-				printf("%s vs %s \n", p1, p2);
+				printf("%s  vs %s \n", p1, p2);
 
 				// Reset grid
 				for (int i = 0; i < 9; i++) {
