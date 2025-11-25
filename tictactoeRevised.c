@@ -74,6 +74,7 @@ int main() {
 	char p1[10], p2[10];
 	int rematch = 1;
 	int winCount[2]={0,0};
+	int lastplayer;
 
 	// start of game logic
 	printf("Enter name of player 1: ");
@@ -83,8 +84,6 @@ int main() {
 
 	printf("player 1: %s \n", p1);
 	printf("player 2: %s \n", p2);
-
-	int lastplayer;
 
 	while (rematch) {
 		while (1) {
@@ -98,19 +97,18 @@ int main() {
 			printf("The game is a draw! \n");
 			displayGrid(grid);
 		}
-		else if (lastplayer == 1) {
-			printf("%s wins! \n", p1);
+		else{
+			if (lastplayer == 1) {
+				printf("%s wins! \n", p1);
+				winCount[0]++;
+			}
+			if (lastplayer == 2) {
+				printf("%s wins! \n", p2);
+				winCount[1]++;
+			}
 			displayGrid(grid);
-			winCount[0]++;
 			displayScore(winCount,p1,p2);
-		}
-		else if (lastplayer == 2) {
-			printf("%s \n", p2);
-			displayGrid(grid);
-			winCount[1]++;
-			displayScore(winCount,p1,p2);
-		}
-
+		} 
 		while (1) {
 			char choice;
 
@@ -130,7 +128,6 @@ int main() {
 				for (int i = 0; i < 9; i++) {
 					grid[i] = '1' + i;
 				}
-
 				break;
 			}
 			else {
